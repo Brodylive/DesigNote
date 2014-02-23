@@ -656,8 +656,8 @@ a#account:hover {
 }
 
 .bloc.unfold {
-	width: 150px;
-	height: 150px;
+	width: 300px;
+	height: 300px;
 }
 
 .bloc.unfold .info {
@@ -671,8 +671,8 @@ a#account:hover {
 
 
 .bloc .info img {
-	width: 150px;
-	height: 150px;
+	width: 300px;
+	height: 300px;
 }
 
 
@@ -721,6 +721,11 @@ canvas {
 
 #editcolor, #editbckgr, #edittypo, #editframe {
 	display: none;
+}
+
+#resultnote {
+	display: none;
+	margin: 20px 0;
 }
 
 
@@ -1388,7 +1393,7 @@ h4{
 
 #searchrandom{
 	width: 300px;
-	margin: auto;
+	margin: 10px auto;
 
 	
 	position: absolute;
@@ -1410,7 +1415,7 @@ h4{
 
 #searchnote{
 	width: 300px;
-	margin: auto;
+	margin: 10px auto;
 
 
 	position: absolute;
@@ -1440,9 +1445,10 @@ h4{
 }
 
 #findnotes img {
-	width: 150px;
-	height: 150px;
+	width: 300px;
+	height: 300px;
 	display: block;
+	float: left;
 }
 
 /* ----------------ACCOUNT ----------------*/
@@ -1518,8 +1524,10 @@ h4{
 	max-width: 320px;
 	margin: 10px auto 0;
 	border-radius: 10px; 
-		color: #fff;
+	color: #fff;
 	font-size: 25px;
 	font-family: 'daxlineprobold', sans-serif;
 	text-align: center;	
 }
+
+
