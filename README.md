@@ -4,8 +4,7 @@ Designote
 
 PRESENTATION:
 
-
-
+DesigNote est une application ayant pour but de créer des notes personnalisées. Vous avez la possibilité de modifier la couleur du texte, de changer de caractères ainsi que leur taille, d'ajouter un fond de couleur ou un motif ou une photo et d'y ajouter un cadre. Ensuite, vous pouvez partager votre note sur différents réseaux sociaux.
 
 LIENS:
 
