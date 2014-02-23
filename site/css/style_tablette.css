@@ -1,0 +1,115 @@
+/*
+	
+	HOME
+	
+*/
+
+header {
+	height: 600px;
+}
+
+.two-columns {
+	height: 600px;
+}
+
+
+
+
+
+/* HOME - COLUMN LEFT */
+
+h1 {
+
+
+
+background-size: cover;
+width: 308px;
+height: 200px;
+}
+
+h2 {
+
+	font-size: 30px;
+	text-align: center;
+	
+
+	}
+
+
+#clearfix a {
+	font-size: 18px;
+}
+
+
+
+/* HOME - COLUMN RIGHT */
+
+#container-slide {
+	width: 51.757813%; /* 265px / 512px */
+	background-size: 100%; /* 265px / 512px */
+	padding-top: 17.8%; 
+}
+
+.slide {
+	margin-left: 6.4%; /* 17px / 270px */
+	max-width: 88%; /* 234px / 270px */
+}
+
+
+
+
+
+/*
+	
+	ABOUT
+	
+*/
+
+.three-columns {
+	float: none;
+	width: 100%; /* 924px / 984px */
+	margin-right: 0;
+	margin-bottom: 60px;
+}
+
+.three-columns:last-child {
+	margin-bottom: 0;
+}
+
+.three-columns img {
+	display: block;
+	float: left;
+	width: 100px;
+	margin: 0 20px 50px 0;
+}
+
+
+
+
+#promotion video {
+	display: block;
+	background: rgba(0,0,0,0.93);
+	width: 600px;
+	margin: 0 auto 40px;
+}
+
+
+
+#future p {
+	width: 100%;
+}
+
+/*
+	
+	CONTACT
+	
+*/
+
+#contact {
+	height: 500px;
+}
+
+#developers li {
+	width: 30%;
+	margin-right: 4.8828125%; /* 50px / 984px */
+}
