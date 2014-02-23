@@ -1,0 +1,169 @@
+/*
+	
+	HOME
+	
+*/
+
+header {
+	height: 550px;
+	padding-top: 0;
+}
+
+.two-columns {
+	height: 550px;
+}
+
+
+
+
+
+/* HOME - COLUMN LEFT */
+
+h1 {
+background-size: cover;
+width: 200px;
+height: 130px;
+}
+
+h2 {
+	font-size: 24px;
+	text-align: center;
+}
+
+
+
+
+
+/*
+
+	SIDEBAR
+
+*/
+
+#clearfix {
+	display: none;
+}
+
+
+
+
+
+/*
+	
+	ABOUT
+	
+*/
+
+#about {
+	height: auto;
+}
+
+.three-columns img {
+	float: none;
+	width: 40%; 
+	margin: 0 auto 20px;
+}
+
+.three-columns p {
+	margin-left: 0;
+}
+
+
+
+
+
+/*
+	
+	GALLERY
+	
+*/
+
+.pictures {
+	width: 100%;
+	margin: 0;
+	margin-bottom: 10px;
+}
+
+
+
+
+
+#promotion video {
+	display: block;
+	background: rgba(0,0,0,0.93);
+	width: 280px;
+	margin: 0 auto 40px;
+}
+
+/*
+	
+	DOWNLOAD
+	
+*/
+
+#download .bouton-download {
+	width: 220px;
+	padding: 20px 15px;
+	margin: 140px auto 170px;
+	border-radius: 15px;
+	font-size: 28px;
+	
+	background-position: 10px 10px;
+	background-size: 60px 60px;
+	text-indent: 70px;
+}
+
+
+
+
+
+/*
+	
+	CONTACT
+	
+*/
+
+#contact {
+	height: 1150px;
+}
+
+#developers li {
+	float: none;
+	width: 100%;
+	margin-bottom: 100px;
+}
+
+#developers a img {
+	width: 150px;
+	height: 150px;
+	border-radius: 75px;
+}
+
+
+
+
+
+/*
+	
+	FOOTER
+	
+*/
+
+#footer {
+	font-size: 16px;
+}
+
+#footer #credit {
+	top: -534px;
+}
+
+.columns-credit {
+	float: none;
+	margin-right: 0px;
+}
+
+#footer #credit:after {
+	right: 67px;
+}
+
+
