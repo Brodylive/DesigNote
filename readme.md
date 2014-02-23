@@ -8,15 +8,15 @@ DesigNote est une application ayant pour but de créer des notes personnalisées
 
 LIENS:
 
-• Application: http://mathieugodefroid.be/designote/
-• Site de présentation: http://mathieugodefroid.be/DesigNote/
-• Vidéo: http://www.youtube.com/watch?v=_mVgfIMo9W8
+- Application: http://mathieugodefroid.be/designote/
+- Site de présentation: http://mathieugodefroid.be/DesigNote/
+- Vidéo: http://www.youtube.com/watch?v=_mVgfIMo9W8
 
 
 GROUPE:
 
 • Jennifer Denis:
-  - site: http://jenniferdenis.be/
+  - site: http://jenniferdenis.be/blog/
   - twitter: https://twitter.com/Brodylive
 
 • Camille Florquin:
