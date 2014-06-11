@@ -1,0 +1,23 @@
+/* The following CSS prevents Safari from changing the font size when the device is rotated - you may or may not need this 
+
+.page, .menu-reveal {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	padding: 10px;
+
+	transition: .4s ease-out;
+}
+.active {
+	z-index: 10;
+}
+.menu-reveal {
+	z-index: -1;
+}
+.menu-reveal a {
+	color: #fff;
+	text-decoration: none;
+}
+.menu-is-revealed .page {
+	-webkit-transform: translateX(80%);
+}

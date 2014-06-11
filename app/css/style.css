@@ -1524,10 +1524,161 @@ h4{
 	max-width: 320px;
 	margin: 10px auto 0;
 	border-radius: 10px; 
-	color: #fff;
+		color: #fff;
 	font-size: 25px;
 	font-family: 'daxlineprobold', sans-serif;
 	text-align: center;	
 }
+
+
+
+
+/* ----------------CAMILLE -- TYPOGRAPHIE ----------------*/
+
+
+
+#choixtaille{
+float: right;
+	
+}
+
+
+#up{
+	float: left;
+	height: 30px;
+	width: 30px;
+	font-size: 10px;
+
+}
+
+#down{
+	float: left;
+	height: 30px;
+	width: 30px;
+	font-size: 10px;
+
+
+}
+
+#marginup{
+	float: left;
+	height: 30px;
+	width: 30px;
+	font-size: 10px;
+
+	
+}
+
+#margindown{
+	float: left;
+	height: 30px;
+	width: 30px;
+	font-size: 10px;
+
+}
+
+.hidden {
+  display : none;
+}
+
+
+
+
+#edittypo{
+	width: 100%;
+	height: 50px;
+	margin-bottom: 0;
+}
+
+
+
+
+/* naaaaaav   */
+
+
+
+#navtype {
+
+   text-align: center;
+   margin: 0;
+   text-decoration: none;
+   float: left;
+   
+}
+    #navtype > a {
+        display: none;
+        
+    }
+    
+    #navtype li {
+        position: relative;
+        list-style: none;
+        text-align: left;
+        
+        
+        color: white;
+        background-color: #1ABC9C;
+        
+        background-color: #a4a4a4;
+
+
+        
+
+        
+        width: 125px;
+        
+
+        
+    }
+ 
+
+ 
+ #navtype li:hover{
+	 background-color: #1ABC9C;
+ }
+ 
+ 
+    /* first level */
+ 
+    #navtype > ul {
+        height: 30px;
+        margin: 0 auto;
+        padding: 5px;
+
+        
+    }
+        #navtype > ul > li {
+
+            height: 100%;
+            float: left;
+
+            
+            
+        }
+ 
+    /* second level */
+ 
+    #navtype li ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        margin-top: -375px;
+    }
+        
+        
+        #navtype li:hover ul {
+            display: block;
+        }
+        
+        
+
+#navtype a{
+	color: #fff;
+	text-decoration: none;
+}
+
+
+
+/*   /nav */
 
 

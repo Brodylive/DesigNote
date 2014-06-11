@@ -1,7 +1,7 @@
 <?php
 
 try {
-    $bdd = new PDO('mysql:host=mysql51-99.perso;dbname=mathieugmmod1', 'mathieugmmod1', 'nJhJ7q2EbksX');
+    $bdd = new PDO('mysql:host=localhost;dbname=jenniferdenis', 'jenniferdenis', 'SjwYCnv2tt29BqLd');
 }
 
 catch (Exception $e) {
@@ -15,10 +15,11 @@ catch (Exception $e) {
 		$reponserandom = $bdd->query("SELECT * FROM notes ORDER BY RAND() LIMIT 1");
 		
 		$donneesrandom = $reponserandom->fetch();
-
+		
+		$id = $donneesrandom['id'];
 		$img = $donneesrandom['img'];
 
-		echo "displaynoterandom('$img');";
+		echo "displaynoterandom('$img', '$id');";
 
 
 ?>

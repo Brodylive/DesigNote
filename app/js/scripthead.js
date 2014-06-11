@@ -133,3 +133,37 @@ function activemenu() {
 		}
 		
 	}
+
+	var padding= 0;
+
+	function Margin(sens) {
+
+		if(padding<=0) {
+			document.getElementById("margindown").innerHTML="Too small";
+			document.getElementById("margindown").style.color="rgba(0,0,0,0.5)";
+		} else {
+			document.getElementById("margindown").innerHTML="Down margin";
+			document.getElementById("margindown").style.color="rgba(0,0,0,1)";
+		}
+
+		if(padding>=200) {
+			document.getElementById("marginup").innerHTML="Too large";
+			document.getElementById("marginup").style.color="rgba(0,0,0,0.5)";
+		} else {
+			document.getElementById("marginup").innerHTML="Up margin";
+			document.getElementById("marginup").style.color="rgba(0,0,0,1)";
+		}
+
+		if(sens=="up" && padding<200) {
+			padding+=10;
+			document.getElementById("note").style.paddingTop=padding + "px";
+		}
+
+		if(sens=="down" && padding>0) {
+			padding-=10;
+			document.getElementById("note").style.paddingTop=padding + "px";
+		}
+		
+	}
+	
+	

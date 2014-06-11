@@ -1,12 +1,14 @@
 <?php
-	 //ini_set('display_errors', 1);
-	 //error_reporting(E_ALL);
+	 /*
+ini_set('display_errors', 1);
+	 error_reporting(E_ALL);
+*/
 
 
 
 	
 try {
-    $bdd = new PDO('mysql:host=mysql51-99.perso;dbname=mathieugmmod1', 'mathieugmmod1', 'nJhJ7q2EbksX');
+    $bdd = new PDO('mysql:host=localhost;dbname=jenniferdenis', 'jenniferdenis', 'SjwYCnv2tt29BqLd');
 }
 
 catch (Exception $e) {
@@ -123,12 +125,150 @@ catch (Exception $e) {
 
 	<script type="text/javascript" src="js/canvas2image.js"></script>
 
+	<script src="http://www.nihilogic.dk/labs/canvas2image/base64.js"></script>
+<script src="http://www.nihilogic.dk/labs/canvas2image/canvas2image.js"></script>
+
+<script type="text/javascript">
+
+// setup our test canvas
+// and a simple drawing function
+window.onload = function() {
+
+	var bMouseIsDown = false;
 	
+	var oCanvas = document.getElementById("thecanvas1");
+	var oCtx = oCanvas.getContext("2d");
+
+
+	var iWidth = oCanvas.width;
+	var iHeight = oCanvas.height;
+
+	oCtx.fillStyle = "rgb(255,255,255)";
+	oCtx.fillRect(0,0,iWidth,iHeight);
+
+	oCtx.fillStyle = "rgb(255,0,0)";
+	oCtx.fillRect(20,20,30,30);
+
+	oCtx.fillStyle = "rgb(0,255,0)";
+	oCtx.fillRect(60,60,30,30);
+
+	oCtx.fillStyle = "rgb(0,0,255)";
+	oCtx.fillRect(100,100,30,30);
+
+	oCtx.beginPath();
+	oCtx.strokeStyle = "rgb(255,0,255)";
+	oCtx.strokeWidth = "4px";
+
+	oCanvas.onmousedown = function(e) {
+		bMouseIsDown = true;
+		iLastX = e.clientX - oCanvas.offsetLeft + document.body.scrollLeft;
+		iLastY = e.clientY - oCanvas.offsetTop + document.body.scrollTop;
+	}
+	oCanvas.onmouseup = function() {
+		bMouseIsDown = false;
+		iLastX = -1;
+		iLastY = -1;
+	}
+	oCanvas.onmousemove = function(e) {
+		if (bMouseIsDown) {
+			var iX = e.clientX - oCanvas.offsetLeft + document.body.scrollLeft;
+			var iY = e.clientY - oCanvas.offsetTop + document.body.scrollTop;
+			oCtx.moveTo(iLastX, iLastY);
+			oCtx.lineTo(iX, iY);
+			oCtx.stroke();
+			iLastX = iX;
+			iLastY = iY;
+		}
+	}
+
+	function showDownloadText() {
+		document.getElementById("buttoncontainer").style.display = "none";
+		document.getElementById("textdownload").style.display = "block";
+	}
+
+	function hideDownloadText() {
+		document.getElementById("buttoncontainer").style.display = "block";
+		document.getElementById("textdownload").style.display = "none";
+	}
+
+	function convertCanvas(strType) {
+		if (strType == "PNG")
+			var oImg = Canvas2Image.saveAsPNG(oCanvas, true);
+		if (strType == "BMP")
+			var oImg = Canvas2Image.saveAsBMP(oCanvas, true);
+		if (strType == "JPEG")
+			var oImg = Canvas2Image.saveAsJPEG(oCanvas, true);
+
+		if (!oImg) {
+			alert("Sorry, this browser is not capable of saving " + strType + " files!");
+			return false;
+		}
+
+		oImg.id = "canvasimage";
+
+		oImg.style.border = oCanvas.style.border;
+		document.body.replaceChild(oImg, oCanvas);
+
+		showDownloadText();
+	}
+
+	function saveCanvas(pCanvas, strType) {
+		var bRes = false;
+		if (strType == "PNG")
+			bRes = Canvas2Image.saveAsPNG(oCanvas);
+		if (strType == "BMP")
+			bRes = Canvas2Image.saveAsBMP(oCanvas);
+		if (strType == "JPEG")
+			bRes = Canvas2Image.saveAsJPEG(oCanvas);
+
+		if (!bRes) {
+			alert("Sorry, this browser is not capable of saving " + strType + " files!");
+			return false;
+		}
+	}
+
+	document.getElementById("savepngbtn").onclick = function() {
+		saveCanvas(oCanvas, "PNG");
+	}
+	document.getElementById("savebmpbtn").onclick = function() {
+		saveCanvas(oCanvas, "BMP");
+	}
+	document.getElementById("savejpegbtn").onclick = function() {
+		saveCanvas(oCanvas, "JPEG");
+	}
+
+	document.getElementById("convertpngbtn").onclick = function() {
+		convertCanvas("PNG");
+	}
+	document.getElementById("convertbmpbtn").onclick = function() {
+		convertCanvas("BMP");
+	}
+	document.getElementById("convertjpegbtn").onclick = function() {
+		convertCanvas("JPEG");
+	}
+
+	document.getElementById("resetbtn").onclick = function() {
+		var oImg = document.getElementById("canvasimage");
+		document.body.replaceChild(oCanvas, oImg);
+
+		hideDownloadText();
+	}
+
+}
+</script>
   <link rel='stylesheet prefetch' href='http://dimsemenov-static.s3.amazonaws.com/dist/magnific-popup.css'>
 
   <script src="js/prefixfree.min.js"></script>
     <script src="js/hammer.min.js"></script>
+	<script type="text/javascript">
+		function writeNote() {
+			var x = prompt('Ecrivez votre note!');
 
+			document.getElementById("note").innerHTML=x;
+		}
+
+
+	</script>
 
 </head>
 
@@ -276,12 +416,17 @@ catch (Exception $e) {
 
 <script type='text/javascript' src="js/jquery.sidr.min.js"></script>
 
+
+
  
 <div id="sidr" class="menu-reveal">
-  <?php echo "<img src='".$_SESSION['designoteimg']."'>"; ?>
+	
+	<a href="javascript:DisplayPages('accountuser', '');">
+	<?php echo "<img src='".$_SESSION['designoteimg']."'>"; ?>
 
-  <?php echo "<h2> ".$_SESSION['designoteuser']."</h2>"; ?>
-  <?php echo "<h3> ".$_SESSION['designotename']."</h3>"; ?>
+	<?php echo "<h2> ".$_SESSION['designoteuser']."</h2>"; ?>
+	<?php echo "<h3> ".$_SESSION['designotename']."</h3>"; ?>
+	</a>
 
   <ul class="menu-reveal" id="nav">
     <li id="home" class="active"><a href="javascript:DisplayPages('index', 'home');" class="menu-reveal-link">Home</a></li>
@@ -339,161 +484,87 @@ catch (Exception $e) {
 
 
 	<div id="index" class="clearfix page">
-
-		<h2><img src="img/time.png" width="20px">Latest Notes</h2>
-
-		<div id="portfolio">
-
-			<div class="bloc unfold">
-				<a class="thumb" href="#projet01">
-					<img src="img/note/1.jpg" alt="">
-				</a>
-				<div class="info">
-					<img src="img/note/1.jpg" alt="">
-				</div>
-			</div>
-
-			<div class="bloc">
-				<a class="thumb" href="#projet02">
-					<img src="img/note/2.jpg" alt="">
-				</a>
-				<div class="info">
-					<img src="img/note/2.jpg" alt="">
-				</div>
-			</div>
-
-
-			<div class="bloc">
-				<a class="thumb" href="#projet03">
-					<img src="img/note/3.jpg" alt="">
-				</a>
-				<div class="info">
-					<img src="img/note/3.jpg" alt="">
-				</div>
-			</div>
-
-
-			<div class="bloc">
-				<a class="thumb" href="#projet04">
-					<img src="img/note/4.jpg" alt="">
-				</a>
-				<div class="info">
-					<img src="img/note/4.jpg" alt="">
-				</div>
-			</div>
-
-						<div class="bloc">
-				<a class="thumb" href="#projet05">
-					<img src="img/note/5.jpg" alt="">
-				</a>
-				<div class="info">
-					<img src="img/note/5.jpg" alt="">
-				</div>
-			</div>
-
-			<div class="bloc">
-				<a class="thumb" href="#projet06">
-					<img src="img/note/6.jpg" alt="">
-				</a>
-				<div class="info">
-					<img src="img/note/6.jpg" alt="">
-				</div>
-			</div>
-
-
-			<div class="bloc">
-				<a class="thumb" href="#projet07">
-					<img src="img/note/7.jpg" alt="">
-				</a>
-				<div class="info">
-					<img src="img/note/7.jpg" alt="">
-				</div>
-			</div>
-
-
-			<div class="bloc">
-				<a class="thumb" href="#projet08">
-					<img src="img/note/8.jpg" alt="">
-				</a>
-				<div class="info">
-					<img src="img/note/8.jpg" alt="">
-				</div>
-			</div>
+	
 	
 
 
+		<h2><img src="img/time.png" width="20px">Latest Notes</h2>
+		<div id="portfolio">
+		
+		<script type="text/javascript">
+		
+		
+			function FavoriteIt(id) { 
+			alert('vous aimez ' + id);
+			
+	
+				xhr.open("GET","favorites.php?id="+id,true);
+				xhr.onreadystatechange=function(){
+				  if(xhr.readyState==4)
+				    if(xhr.status==200) {
+						eval(xhr.responseText);
+				    }
+				}
+	
+				xhr.send();
+				
+		}
+		
+		
+		</script>
+	
+	<?php
+	
+			$reponselatest= $bdd->query("SELECT * FROM notes ORDER BY date DESC");
+	
+			while ($donneeslatest = $reponselatest->fetch()) {
+	
+	?>
+	
+				<div class="bloc">
+					<a class="thumb" href="#note<?php echo $donneeslatest['id']; ?>">
+						<img src="<?php echo $donneeslatest['img']; ?>" alt=""></a>
+					<div class="info">
+						<a href="javascript:FavoriteIt(<?php echo $donneeslatest['id'] ?>);"><img src="<?php echo $donneeslatest['img']; ?>" alt=""></a>
+					</div>
+				</div>
+	
+	<?php
+			}
+	
+	
+	?>
+				
+		</div>		
+		
 
-		</div>
 
 		<h2 class="mostviewed"><img src="img/coeur.png"> Most Viewed</h2>
-
-
 		<div id="portfolio2">
-			<div class="bloc">
-				<a class="thumb" href="#projet01">
-					<img src="img/note/1.jpg" alt="">
-				</a>
-				<div class="info">
-					<img src="img/note/1.jpg" alt="">
+	
+	<?php
+	
+			$reponseviewed= $bdd->query("SELECT * FROM notes ORDER BY favoris DESC");
+	
+			while ($donneesviewed = $reponseviewed->fetch()) {
+	
+	?>
+	
+				<div class="bloc">
+					<a class="thumb" href="#note<?php echo $donneesviewed['id']; ?>">
+						<img src="<?php echo $donneesviewed['img']; ?>" alt=""></a>
+					<div class="info">
+						<a href="javascript:FavoriteIt(<?php echo $donneesviewed['id'] ?>);"><img src="<?php echo $donneesviewed['img']; ?>" alt=""></a>
+					</div>
 				</div>
-			</div>
-
-			<div class="bloc">
-				<a class="thumb" href="#projet02">
-					<img src="img/note/1.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/1.jpg" alt="">
-				</div>
-			</div>
-
-			<div class="bloc">
-				<a class="thumb" href="#projet03">
-					<img src="img/note/2.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/2.jpg" alt="">
-				</div>
-			</div>
-
-			<div class="bloc">
-				<a class="thumb" href="#projet04">
-					<img src="img/note/3.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/3.jpg" alt="">
-				</div>
-			</div>
-
-			<div class="bloc">
-				<a class="thumb" href="#projet05">
-					<img src="img/note/4.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/4.jpg" alt="">
-				</div>
-			</div>
-
-			<div class="bloc">
-				<a class="thumb" href="#projet06">
-					<img src="img/note/5.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/5.jpg" alt="">
-				</div>
-			</div>
-
-			<div class="bloc">
-				<a class="thumb" href="#projet07">
-					<img src="img/note/6.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/6.jpg" alt="">
-				</div>
-			</div>
-			
-			<div class="bloc">
-				<a class="thumb" href="#projet08">
-					<img src="img/note/7.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/7.jpg" alt="">
-				</div>
-			</div>
-
+	
+	<?php
+			}
+	
+	
+	?>
+				
+		</div>
 			
 			
 	</div>
@@ -506,9 +577,9 @@ catch (Exception $e) {
 		<h2><img src="img/minirandom.png" width="20px">Random</h2>
 
 
-		<img id="randomdisplay" src="" alt="random image">
+		<a id="randomid" href=""><img id="randomdisplay" src="" alt="random image"></a>
 
-		<script type="text/javascript">
+<script type="text/javascript">
 
 		function createXhrObject()
 	{
@@ -535,9 +606,10 @@ catch (Exception $e) {
 
 		xhr=createXhrObject();
 
-    function displaynoterandom(imgsrc){
+    function displaynoterandom(imgsrc, id){
     	
     	document.getElementById('randomdisplay').src=imgsrc;
+    	document.getElementById('randomid').href="javascript:FavoriteIt("+id+");";
     }
 
 
@@ -554,9 +626,9 @@ catch (Exception $e) {
 		xhr.send();
 		
 	}
+	
 
-
-		</script>
+</script>
 
 	</div>
 
@@ -564,7 +636,7 @@ catch (Exception $e) {
 	<div id="searchnote">
 			<h2><img src="img/miniloupe.png" width="20px">Research</h2>
 
-	<script type="text/javascript">
+<script type="text/javascript">
 
 
 	    function findnotes(varsearch){
@@ -589,9 +661,10 @@ catch (Exception $e) {
 			xhr.send();
 			}
 		}
+		
 
 
-	</script>
+</script>
 
 		<form>
 			<input type="text" id="searchpattern" onkeyup="search();">
@@ -606,19 +679,11 @@ catch (Exception $e) {
 <div id="accountuser">
 
 
-
-	
 	<div id="avatar">
-	  
-
-
-
+	
 	<?php echo "<img src='".$_SESSION['designoteimg']."'>"; ?>
-  <?php echo "<h2> ".$_SESSION['designoteuser']."</h2>"; ?>
-  <?php echo "<h3> ".$_SESSION['designotename']."</h3>"; ?>
-
-	  
-	 
+	<?php echo "<h2> ".$_SESSION['designoteuser']."</h2>"; ?>
+	<?php echo "<h3> ".$_SESSION['designotename']."</h3>"; ?>
 	  
 	</div>
 	
@@ -626,7 +691,18 @@ catch (Exception $e) {
 	<div id="infosuser">
 		
 		<div class="case prem"> 
-			<p class="nb">35</p>
+
+			<?php
+		$iduser=$_SESSION['designote'];
+		$reponsenombrenotes = $bdd->query("SELECT id FROM notes WHERE user_id=$iduser");
+		
+		$resultatsnombrenotes = $reponsenombrenotes->rowCount();
+		
+
+	?>
+
+
+			<p class="nb"><?php echo $resultatsnombrenotes; ?></p>
 			<p class="lt">Notes</p>
 		</div>
 		
@@ -747,17 +823,36 @@ catch (Exception $e) {
 
 		<div id="resultnote">
 			<h2>Your note</h2>
-		</div>
 
+			<canvas id="thecanvas1"></canvas>
+
+
+<br/><br/>
+<div id="textdownload" style="display:none;font-style:italic;">Now you can right click and download the image<br/>
+<input type="button" id="resetbtn" value="Reset">
+</div>
+
+<div id="buttoncontainer" style="display:block;">
+<input type="button" id="savepngbtn" value="Save PNG">
+<input type="button" id="convertpngbtn" value="Convert to PNG">
+<br/>
+<input type="button" id="savebmpbtn" value="Save BMP">
+<input type="button" id="convertbmpbtn" value="Convert to BMP">
+<br/>
+<input type="button" id="savejpegbtn" value="Save JPEG">
+<input type="button" id="convertjpegbtn" value="Convert to JPEG">
+
+</div>
+		</div>
 		<div id="canvasnote">
-		<form id="bckgr">
+			<div id="bckgr">
+		<p id="note" onclick="writeNote();DisplayPopin('', '');"><?php echo "\r\r\r\rWhat would you like to note ". $_SESSION['designoteuser']."?";?></p>
 
-			<textarea id="note" onclick="DisplayPopin('', '');"><?php echo "\r\r\r\rWhat would you like to note ". $_SESSION['designoteuser']."?";?></textarea>
+	</div>
 
-		</form>
+
 
 		</div>
-
 		
 		
 		<div id="editcolor">
@@ -768,23 +863,67 @@ catch (Exception $e) {
 
         <div id="edittypo">
 
-        	<a id="arial" href="javascript:ChangeTypo('arial');">Arial</a>
-        	<a id="times" href="javascript:ChangeTypo('times');">Times</a>
-        	<a id="alluraregular" href="javascript:ChangeTypo('alluraregular');">Allura</a>
-			<a id="belligerent_madnessregular" href="javascript:ChangeTypo('belligerent_madnessregular');">Belligerent Madness</a>
-			<a id="carbontyperegular" href="javascript:ChangeTypo('carbontyperegular');">Carbontype</a>
-			<a id="distant_galaxyregular" href="javascript:ChangeTypo('distant_galaxyregular');">Distant Galaxy</a>
 
-			<a id="flux_architectregular" href="javascript:ChangeTypo('flux_architectregular');">Flux Architectregular</a>
-			<a id="gongnormal" href="javascript:ChangeTypo('gongnormal');">Gong</p>
-			<a id="henny_pennyregular" href="javascript:ChangeTypo('henny_pennyregular');">Henny Penny</a>
-			<a id="idolwildregular" href="javascript:ChangeTypo('idolwildregular');">Idolwild</a>
+				
+				
+				<div id="navtype" role="navigation">
+				    <a href="#navtype" title="Show navigation">Show navigation</a>
+				    <a href="#" title="Hide navigation">Hide navigation</a>
+				   
+				    <ul class="titrre">
+				
+				        <li>
+				   
+				           
+				           
+				            <ul class="second">
+				                
+				                
+				                
+				                
+				                <li><a id="arial" href="javascript:ChangeTypo('arial');">Arial</a></li>
+				                <li><a id="times" href="javascript:ChangeTypo('times');">Times</a></li>
+				                <li><a id="alluraregular" href="javascript:ChangeTypo('alluraregular');">Allura</a></li>
+								<li><a id="belligerent_madnessregular" href="javascript:ChangeTypo('belligerent_madnessregular');">Belligerent Madness</a></li>
+								<li><a id="carbontyperegular" href="javascript:ChangeTypo('carbontyperegular');">Carbontype</a></li>
+								<li><a id="distant_galaxyregular" href="javascript:ChangeTypo('distant_galaxyregular');">Distant Galaxy</a></li>
+								<li><a id="flux_architectregular" href="javascript:ChangeTypo('flux_architectregular');">Flux Architectregular</a></li>
+								<li><a id="gongnormal" href="javascript:ChangeTypo('gongnormal');">Gong</a></li>
+								<li><a id="henny_pennyregular" href="javascript:ChangeTypo('henny_pennyregular');">Henny Penny</a></li>
+								<li><a id="idolwildregular" href="javascript:ChangeTypo('idolwildregular');">Idolwild</a></li>
+								
+								
+								
+				            </ul>
+				            
+				                     <a href="#navtype" aria-haspopup="true">Typographies</a>
+				         
+				            
+				        </li>
+				
+				    </ul>
+				</div>
 
-			<hr>
-			<a id="up" href="javascript:FontSize('up');">Up font-size</a>
-			<a id="down" href="javascript:FontSize('down');">Down font-size</a>
 
+
+
+
+			<div id="choixtaille">
+			<a id="up" href="javascript:FontSize('up');"><img src="img/up.png" width="30px" height="30px"/><span class="hidden">Up font-size</span></a>
+			<a id="down" href="javascript:FontSize('down');"><img src="img/down.png" width="30px" height="30px"/><span class="hidden">Down font-size</span></a>
+			<a id="marginup" href="javascript:Margin('up');"><img src="img/marginup.png" width="30px" height="30px"/><span class="hidden">Up margin</span></a>
+			<a id="margindown" href="javascript:Margin('down');"><img src="img/margindown.png" width="30px" height="30px"/><span class="hidden">Down margin</span></a>
+			</div>
+			
+			
+			
         </div>
+
+
+
+
+
+
 
         <div id="editbckgr">
 
@@ -823,70 +962,30 @@ catch (Exception $e) {
 <div id="gallerie" class="clearfix page">
 	<h2><img src="img/minigallery.png" width="20px">Gallery</h2>
 	<div id="portfolio3">
-		<div class="bloc">
-				<a class="thumb" href="#projet01">
-					<img src="img/note/1.jpg" alt="">
-				</a>
+
+
+<?php
+
+		$reponsegallery = $bdd->query("SELECT * FROM notes ORDER BY date");
+
+		while ($donneesgallery = $reponsegallery->fetch()) {
+
+?>
+
+			<div class="bloc">
+				<a class="thumb" href="#note<?php echo $donneesgallery['id']; ?>">
+					<img src="<?php echo $donneesgallery['img']; ?>" alt=""></a>
 				<div class="info">
-					<img src="img/note/1.jpg" alt="">
+					<a href="javascript:FavoriteIt(<?php echo $donneesgallery['id'] ?>);"><img src="<?php echo $donneesgallery['img']; ?>" alt=""></a>
 				</div>
 			</div>
 
-			<div class="bloc">
-				<a class="thumb" href="#projet02">
-					<img src="img/note/1.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/1.jpg" alt="">
-				</div>
-			</div>
+<?php
+		}
 
-			<div class="bloc">
-				<a class="thumb" href="#projet03">
-					<img src="img/note/2.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/2.jpg" alt="">
-				</div>
-			</div>
 
-			<div class="bloc">
-				<a class="thumb" href="#projet04">
-					<img src="img/note/3.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/3.jpg" alt="">
-				</div>
-			</div>
-
-			<div class="bloc">
-				<a class="thumb" href="#projet05">
-					<img src="img/note/4.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/4.jpg" alt="">
-				</div>
-			</div>
-
-			<div class="bloc">
-				<a class="thumb" href="#projet06">
-					<img src="img/note/5.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/5.jpg" alt="">
-				</div>
-			</div>
-
-			<div class="bloc">
-				<a class="thumb" href="#projet07">
-					<img src="img/note/6.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/6.jpg" alt="">
-				</div>
-			</div>
+?>
 			
-			<div class="bloc">
-				<a class="thumb" href="#projet08">
-					<img src="img/note/7.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/7.jpg" alt="">
-				</div>
-			</div>
 	</div>
 </div>
 
@@ -894,70 +993,29 @@ catch (Exception $e) {
 <div id="favorisuser" class="clearfix page">
 	<h2><img src="img/coeur.png" width="20px">Favoris</h2>
 	<div id="portfolio4">
-		<div class="bloc">
-				<a class="thumb" href="#projet01">
-					<img src="img/note/1.jpg" alt="">
-				</a>
+
+		<?php
+
+		$reponsefavoris = $bdd->query("SELECT * FROM notes ORDER BY favoris DESC");
+
+		while ($donneesfavoris = $reponsefavoris->fetch()) {
+
+?>
+
+			<div class="bloc">
+				<a class="thumb" href="#favoris<?php echo $donneesfavoris['id']; ?>">
+					<img src="<?php echo $donneesfavoris['img']; ?>" alt=""></a>
 				<div class="info">
-					<img src="img/note/1.jpg" alt="">
+					<a href="javascript:FavoriteIt(<?php echo $donneesfavoris['id'] ?>);"><img src="<?php echo $donneesfavoris['img']; ?>" alt=""></a>
 				</div>
 			</div>
 
-			<div class="bloc">
-				<a class="thumb" href="#projet02">
-					<img src="img/note/1.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/1.jpg" alt="">
-				</div>
-			</div>
+<?php
+		}
 
-			<div class="bloc">
-				<a class="thumb" href="#projet03">
-					<img src="img/note/2.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/2.jpg" alt="">
-				</div>
-			</div>
 
-			<div class="bloc">
-				<a class="thumb" href="#projet04">
-					<img src="img/note/3.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/3.jpg" alt="">
-				</div>
-			</div>
-
-			<div class="bloc">
-				<a class="thumb" href="#projet05">
-					<img src="img/note/4.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/4.jpg" alt="">
-				</div>
-			</div>
-
-			<div class="bloc">
-				<a class="thumb" href="#projet06">
-					<img src="img/note/5.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/5.jpg" alt="">
-				</div>
-			</div>
-
-			<div class="bloc">
-				<a class="thumb" href="#projet07">
-					<img src="img/note/6.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/6.jpg" alt="">
-				</div>
-			</div>
+		?>
 			
-			<div class="bloc">
-				<a class="thumb" href="#projet08">
-					<img src="img/note/7.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/7.jpg" alt="">
-				</div>
-			</div>
 	</div>
 </div>
 
@@ -965,70 +1023,33 @@ catch (Exception $e) {
 <div id="notesuser" class="clearfix page">
 	<h2><img src="img/mininote.png" width="20px">My notes</h2>
 	<div id="portfolio5">
-		<div class="bloc">
-				<a class="thumb" href="#projet01">
-					<img src="img/note/1.jpg" alt="">
-				</a>
+				<?php
+
+				$iduser=$_SESSION['designote'];
+
+		$reponsenotesuser = $bdd->query("SELECT * FROM notes WHERE user_id=$iduser");
+
+		// if (fetchColumn($reponsenotesuser)) {
+			while ($donneesnotesuser = $reponsenotesuser->fetch()) {
+
+?>
+
+			<div class="bloc">
+				<a class="thumb" href="#user<?php echo $donneesnotesuser['id']; ?>">
+					<img src="<?php echo $donneesnotesuser['img']; ?>" alt=""></a>
 				<div class="info">
-					<img src="img/note/1.jpg" alt="">
+					<img src="<?php echo $donneesnotesuser['img']; ?>" alt="">
 				</div>
 			</div>
 
-			<div class="bloc">
-				<a class="thumb" href="#projet02">
-					<img src="img/note/1.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/1.jpg" alt="">
-				</div>
-			</div>
+<?php
+		}
 
-			<div class="bloc">
-				<a class="thumb" href="#projet03">
-					<img src="img/note/2.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/2.jpg" alt="">
-				</div>
-			</div>
+	// } else {
+		// echo "<p>Create a note!</p>";
+	// }
 
-			<div class="bloc">
-				<a class="thumb" href="#projet04">
-					<img src="img/note/3.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/3.jpg" alt="">
-				</div>
-			</div>
-
-			<div class="bloc">
-				<a class="thumb" href="#projet05">
-					<img src="img/note/4.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/4.jpg" alt="">
-				</div>
-			</div>
-
-			<div class="bloc">
-				<a class="thumb" href="#projet06">
-					<img src="img/note/5.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/5.jpg" alt="">
-				</div>
-			</div>
-
-			<div class="bloc">
-				<a class="thumb" href="#projet07">
-					<img src="img/note/6.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/6.jpg" alt="">
-				</div>
-			</div>
-			
-			<div class="bloc">
-				<a class="thumb" href="#projet08">
-					<img src="img/note/7.jpg" alt=""></a>
-				<div class="info">
-					<img src="img/note/7.jpg" alt="">
-				</div>
-			</div>
+		?>
 	</div>
 </div>
 
@@ -1160,7 +1181,8 @@ catch (Exception $e) {
         	html2canvas(document.getElementById("canvasnote"), {
             onrendered: function(canvas) {
             	document.getElementById("resultnote").style.display="block";
-                document.getElementById("resultnote").appendChild(canvas);
+            	anchor=document.getElementById("thecanvas1");
+                anchor.parentNode.replaceChild(canvas, anchor);
             }
         });
         }

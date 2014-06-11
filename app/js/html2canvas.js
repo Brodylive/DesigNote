@@ -2814,7 +2814,7 @@ _html2canvas.Renderer.Canvas = function(options) {
 
     canvas.width = canvas.style.width =  options.width || zStack.ctx.width;
     canvas.height = canvas.style.height = options.height || zStack.ctx.height;
-    canvas.id="cvs";
+    canvas.id="thecanvas";
 
     fstyle = ctx.fillStyle;
     ctx.fillStyle = (Util.isTransparent(zStack.backgroundColor) && options.background !== undefined) ? options.background : parsedData.backgroundColor;
@@ -2854,7 +2854,7 @@ _html2canvas.Renderer.Canvas = function(options) {
         // crop image to the bounds of selected (single) element
         bounds = _html2canvas.Util.Bounds(options.elements[0]);
         newCanvas = document.createElement('canvas');
-        newCanvas.id ="cvs";
+        newCanvas.id ="thecanvas";
         newCanvas.width = Math.ceil(bounds.width);
         newCanvas.height = Math.ceil(bounds.height);
         ctx = newCanvas.getContext("2d");

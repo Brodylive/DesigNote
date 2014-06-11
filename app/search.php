@@ -4,13 +4,13 @@
 
     session_start();
 
-    $bdd = new PDO('mysql:host=mysql51-99.perso;dbname=mathieugmmod1', 'mathieugmmod1', 'nJhJ7q2EbksX');
+    $bdd = new PDO('mysql:host=localhost;dbname=jenniferdenis', 'jenniferdenis', 'SjwYCnv2tt29BqLd');
 
     $pattern = $_GET['pattern'];
 
 
 
-		$reponsepattern = $bdd->query("SELECT img FROM notes WHERE title LIKE '%$pattern%'");
+		$reponsepattern = $bdd->query("SELECT id, img FROM notes WHERE title LIKE '%$pattern%'");
 		$resultatspattern = $reponsepattern->rowCount();
 
 		if($resultatspattern != 0) {
@@ -19,9 +19,10 @@
 
 			while( $row=$reponsepattern->fetch(PDO::FETCH_ASSOC) )       
 			{
-				$hello=$row['img'];
+				$img=$row['img'];
+				$id=$row['id'];
 				echo "
-					displaysearch +='<img src=\'$hello\'>';
+					displaysearch +='<a href=\"javascript:FavoriteIt($id);\"><img src=\'$img\'></a>';
 
 				";
 			}

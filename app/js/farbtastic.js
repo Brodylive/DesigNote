@@ -341,3 +341,5 @@ jQuery._farbtastic = function (container, callback) {
   // Set linked elements/callback
   if (callback) {
     fb.linkTo(callback);
+  }
+}
